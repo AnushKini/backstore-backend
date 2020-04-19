@@ -1,0 +1,10 @@
+com\bookstore\dao\IBookStoreDAO.class
+com\bookstore\mapper\BookMapperImpl.class
+com\bookstore\entity\Book.class
+com\bookstore\services\IBookStoreService.class
+com\bookstore\services\BookStoreService.class
+com\bookstore\model\BookModel.class
+com\bookstore\mapper\BookMapper.class
+com\bookstore\model\BookModel$BookModelBuilder.class
+com\bookstore\Application.class
+com\bookstore\controller\BookStoreController.class
