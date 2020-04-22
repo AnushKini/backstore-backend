@@ -1,6 +1,7 @@
 package com.bookstore.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +35,27 @@ public class BookStoreService implements IBookStoreService {
 
 	@Override
 	public BookModel updateBook(long bookId, BookModel book) {
-		Book bookEntity = dao.findOne(bookId);
+		Optional<Book> bookEntity = dao.findById(bookId);
 		if (bookEntity == null) {
 		} else {
-			bookEntity.setName(book.getName());
-			bookEntity.setAuthor(book.getAuthor());
-			bookEntity.setCategory(book.getCategory());
-			bookEntity.setPublication(book.getPublication());
-			bookEntity.setPrice(book.getPrice());
+			bookEntity.get().setName(book.getName());
+			bookEntity.get().setAuthor(book.getAuthor());
+			bookEntity.get().setCategory(book.getCategory());
+			bookEntity.get().setPublication(book.getPublication());
+			bookEntity.get().setPrice(book.getPrice());
 		}
-		return mapper.toBookModel(dao.save(bookEntity));
+		return mapper.toBookModel(dao.save(bookEntity.get()));
 	}
 
 	@Override
 	public BookModel getBook(long bookId) {
-		return mapper.toBookModel(dao.findOne(bookId));
+		Optional<Book> bookEntity = dao.findById(bookId);
+		return mapper.toBookModel(bookEntity.get());
 	}
 
 	@Override
 	public void deleteBook(long bookId) {
-		dao.delete(bookId);
+		dao.deleteById(bookId);
 	}
 
 }
